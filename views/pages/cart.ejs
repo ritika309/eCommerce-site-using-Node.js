@@ -182,9 +182,9 @@
                   
                   <p><%= item.name %></p>
                   <% if(item.sale_price){ %>
-                  <small><span>$</span><%= item.sale_price %></small>
+                  <small><span>₹</span><%= item.sale_price %></small>
                   <% }else{ %>
-                  <small><span>$</span><%= item.price %></small>
+                  <small><span>₹</span><%= item.price %></small>
                   <% } %>
                   <br>
                   <form method="post" action="/remove_item"> 
@@ -212,7 +212,7 @@
                 <% if(item.sale_price) { %>
                 <span class="product-price"><%= item.sale_price * item.quantity %></span>
                 <% }else{ %>
-                <span class="product-price">$<%= item.price * item.quantity %></span>
+                <span class="product-price">₹<%= item.price * item.quantity %></span>
 
                 <% } %>
               

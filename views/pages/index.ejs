@@ -405,11 +405,11 @@
                   <div class="options">
                     
                       <%if (item.sale_price) { %>
-                      <h6>$<%= item.sale_price %></h6>
-                      <h6 style="text-decoration:line-through; color:rgb(158, 158, 158);">$<%= item.price %></h6>
+                      <h6>₹<%= item.sale_price %></h6>
+                      <h6 style="text-decoration:line-through; color:rgb(158, 158, 158);">₹<%= item.price %></h6>
 
                       <%} else {%>
-                       <h6>$<%= item.price %></h6>
+                       <h6>₹<%= item.price %></h6>
                       <%} %>
                     <form action="/add_to_cart" method="post">
                       <input type="hidden", name ="id" value="<%= item.id%>">  
