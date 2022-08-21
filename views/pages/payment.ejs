@@ -44,7 +44,7 @@
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.ejs">
             <span>
-              calmandcode
+              Bistro 101
             </span>
           </a>
 
@@ -156,113 +156,15 @@
     
 
 
-    <div class="container">
-      <h4>Your Order</h4>
+    <div class="container text-center">
+      <h3>Payment</h3>
+      <h3>Total: $<%= total %></h3>
+      <div id="paypal-button-container"></div>
     </div>
+  </section>
 
 
-
-
-    <table class="pt-5">
-      <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Subtotal</th>
-      </tr>
-
-
- 
-        <% cart.forEach(function(item){ %>
-          <tr>
-            <td>
-              <div class="product-info">
-                <img src=" images/<%= item.image %> ">
-                
-                <div>
-                  
-                  <p><%= item.name %></p>
-                  <% if(item.sale_price){ %>
-                  <small><span>$</span><%= item.sale_price %></small>
-                  <% }else{ %>
-                  <small><span>$</span><%= item.price %></small>
-                  <% } %>
-                  <br>
-                  <form method="post" action="/remove_item"> 
-                    <input type="hidden" name="id" value ="<%= item.id%>">
- 
-                    <input type="submit" name="remove_btn" class="remove-btn" value="remove">
-                  </form>
-                </div>
-              </div>
-            </td>
-
-            <td> 
-              <form method = "post" action="/edit_quantity">
-                <input type="hidden" value="<%= item.id%>" name="id">
-                 <input type="submit" value="-" class="edit-btn " name="decrease_product_quantity_btn">
-      
-                <input type="text" name="quantity" value="<%= item.quantity %>" readonly>
-
-                <input type="submit" value="+" class="edit-btn" name="increase_product_quantity_btn">
-              </form>
-            </td>
-
-            <td>
-              
-                <% if(item.sale_price) { %>
-                <span class="product-price"><%= item.sale_price * item.quantity %></span>
-                <% }else{ %>
-                <span class="product-price">$<%= item.price * item.quantity %></span>
-
-                <% } %>
-              
-            </td>
-          </tr>
-        <% }) %>
-
-    </table>
-
-     
-
-    <div class="cart-total">
-      <table>
   
-        <tr>
-          <td>Total</td>
-   
-               <td><%= total %></td>
-      
-        </tr>
-    
-      
-      </table>
-    </div>
-    
-
-    <div class="checkout-container">
-     
-      <form method="get" action="/checkout">
-        <input type="submit" class="btn checkout-btn" value="Checkout" name="">
-      </form>
-    
-    
-    
-    </div>
-
-
-
-
-
-  </section>
-
-
-
-
-
-    </div>
-  </section>
-
-  <!-- end food section -->
 
   <!-- footer section -->
   <footer class="footer_section">
@@ -298,7 +200,7 @@
         <div class="col-md-4 footer-col">
           <div class="footer_detail">
             <a href="" class="footer-logo">
-              calmandcode
+              Bistro 101
             </a>
             <p>
               Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
@@ -364,8 +266,42 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
+  
+  <!-- Set up a container element for the button -->
+  
+  
+
 
 </body>
 
 </html>
+<script src="https://www.paypal.com/sdk/js?client-id=AfOCemLPluS3T1MoHlxahzhIzJZTGhFF9KMH-qjHTIJWebfUAYls-thqcYZ_qQjyVVCg7T2w-4VPio7Z&currency=USD"></script>
+<script>
+    paypal.Buttons({
+      // Sets up the transaction when a payment button is clicked
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '<%= total %>' // Can also reference a variable or function
+            }
+          }]
+        });
+      },
+      // Finalize the transaction after payer approval
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(function(orderData) {
+          // Successful capture! For dev/demo purposes:
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+          const transaction = orderData.purchase_units[0].payments.captures[0];
+          alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+          // When ready to go live, remove the alert and show a success message within this page. For example:
+          // const element = document.getElementById('paypal-button-container');
+          // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+          // Or go to another URL:  actions.redirect('thank_you.html');
 
+          window.location.href="/verify_payment?transaction_id="+transaction.id;
+        });
+      }
+    }).render('#paypal-button-container');
+  </script>
