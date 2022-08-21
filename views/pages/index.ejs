@@ -55,13 +55,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
               <li class="nav-item active">
-                <a class="nav-link" href="index.ejs">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="products.ejs">Menu</a>
+                <a class="nav-link" href="products">Menu</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.ejs">About</a>
+                <a class="nav-link" href="about">About</a>
               </li>
             </ul>
             <div class="user_option">
@@ -397,7 +397,7 @@
                 </div>
                 <div class="detail-box">
                   <h5>
-                    <%= item.name %>
+                    <a href= "single_product?id=<%= item.id %>" style="color:rgb(248, 248, 224)"><%= item.name %> </a>
                   </h5>
                   <p>
                     <%= item.description %>
