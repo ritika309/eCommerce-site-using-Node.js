@@ -1,19 +1,41 @@
 # eCommerce-site-using-Node.js
 
+Bistro 101: An ecommerce website for online fast food restaurant.
 
 ## Home page
 
-![main](Readme/onboarding.jpg)
-<img src="IMAGE_URL_HERE"  width="300" height="300">
+![Menu](./Readme/onboarding.jpg)
+
 ## Menu
 
-<img src="IMAGE_URL_HERE"  width="300" height="300">
-![main](Readme/menu.jpg)
+![Menu](./Readme/menu.jpg)
 
 ## Checkout
 
-<img src="./Readme/checkout.jpg"  width="900" height="500">
+![checkout](./Readme/checkout.jpg)
 
 ## Payment Module
+
 This has been achieved using [PayPal API](https://developer.paypal.com/home)
 
+![paypal](./Readme/paypal.png)
+
+------------
+
+## Tech Used:
+- ### Languages
+  - HTML
+  - CSS (Bootstrap)
+  - Javascript
+  
+- ### Tech and Tools
+  - XAMPP
+  - Node.js
+  - Express.js
+  - PayPal REST API
+  
+-------------
+
+# Checkout Demo Video Here:
+
+[![Link : https://www.youtube.com/embed/hNq2X0SBWcU?start=233](https://img.youtube.com/vi/hNq2X0SBWcU/hqdefault.jpg)](https://www.youtube.com/embed/hNq2X0SBWcU?start=233)
